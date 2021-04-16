@@ -1,0 +1,41 @@
+package com.example.twoactivities;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    public static final String EXTRA_MESSAGE ="com.example.twoactivities.extra.MESSAGE";
+    public static final int TEXT_REQUEST = 1;
+    private EditText mMessageEditText;
+    private TextView mReplyHeadTextView, mReplyMessage;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mMessageEditText = findViewById(R.id.editText_main);
+        mReplyHeadTextView = findViewById(R.id.text_header_reply);
+        mReplyMessage = findViewById(R.id.text_message_reply);
+    }
+
+    public void launchSecondActivity(View view) {
+        String message = mMessageEditText.getText().toString();
+        Intent intent = new Intent( this, SecondActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivityForResult(intent, TEXT_REQUEST);
+    }
+
+    public void onActivityResult(int requestCOde, int resultCode, intent data){
+        super.onActivityResult(requestCOde, resultCode, data);
+        if(requestCOde == TEXT_REQUEST){
+            if(resultCode == RESULT_OK){
+
+            }
+        }
+    }
+}
